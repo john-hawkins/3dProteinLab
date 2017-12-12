@@ -42,13 +42,8 @@ WORKDIR $TOMCAT_HOME
 VOLUME  ["/etc/mysql", "/var/lib/mysql"]
 
 #
-# Add Database Dump 
-ADD dump.sql /tmp/dump.sql
-
-#
 # Copy the WAR file
 COPY 3DProteinLab.war /opt/apache-tomcat-7.0.82/webapps/3DProteinLab.war
-
 
 EXPOSE 8080 
 
