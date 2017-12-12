@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>3DProteinLab</display-name>
+	<servlet>
+		<description>
+		Servlet to execute the main search process</description>
+		<display-name>MainSearch</display-name>
+		<servlet-name>MainSearch</servlet-name>
+		<servlet-class>
+		org.proteinlab.MainSearch</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MainSearch</servlet-name>
+		<url-pattern>/MainSearch</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description>
+		Servlet to execute AJAX driven search process</description>
+		<display-name>AjaxSearch</display-name>
+		<servlet-name>AjaxSearch</servlet-name>
+		<servlet-class>
+		org.proteinlab.AjaxSearch</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AjaxSearch</servlet-name>
+		<url-pattern>/AjaxSearch</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description>
+		Servlet to extract a search result as a CSV file</description>
+		<display-name>ExportCSV</display-name>
+		<servlet-name>ExportCSV</servlet-name>
+		<servlet-class>
+		org.proteinlab.ExportCSV</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ExportCSV</servlet-name>
+		<url-pattern>/ExportCSV</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<description>
+		Servlet to retrive PDB Files</description>
+		<display-name>FetchPDB</display-name>
+		<servlet-name>FetchPDB</servlet-name>
+		<servlet-class>
+		org.proteinlab.FetchPDB</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FetchPDB</servlet-name>
+		<url-pattern>/FetchPDB</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description>
+		Servlet to perform Admin Activities</description>
+		<display-name>AdminApp</display-name>
+		<servlet-name>AdminApp</servlet-name>
+		<servlet-class>
+		org.proteinlab.AdminApp</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminApp</servlet-name>
+		<url-pattern>/AdminApp</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description>
+		Servlet form AJAX contact form submision</description>
+		<display-name>AjaxContact</display-name>
+		<servlet-name>AjaxContact</servlet-name>
+		<servlet-class>
+		org.proteinlab.AjaxContact</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AjaxContact</servlet-name>
+		<url-pattern>/AjaxContact</url-pattern>
+	</servlet-mapping>
+	
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>

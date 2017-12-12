@@ -15,6 +15,9 @@ To create the image `3dproteinlab`, execute the following command on the docker 
 docker build -t 3dproteinlab .
 ```
 
+It usually takes several hours to build because of the size of the DB files.
+
+
 ## Running the App
 
 You could start your image right away, binding to the external ports 8080 
@@ -22,19 +25,58 @@ You could start your image right away, binding to the external ports 8080
 ```shell
 docker run -d -p 8080:8080 3dproteinlab 
 ```
+Which is worth doing to check that tomcat is workking.
+If you point your browser at http://localhost:8080
+You should see the TomCat installation page.
 
-However, if you want the DB to persist across runs of the the application (highly recommended) 
-then you will need to start the container mapping the mysql directory to a local folder, like this:
+In order for the 3D Protein Lab application to work you are going to need a copy of the database containing
+the protien structures and sequences.
+
+The following procedure might seem tedious but we have found it to be the most reliable way to get the DB
+working inside the docker container. Largely because the amount of data is too unwieldy to run as an import
+inside the container.
+
+First create a local directory for the data to live in:
 
 ```shell
 mkdir data
 mkdir data/mysql
+```
+
+Then start the container but map its internal mysql directory to your new external directory.
+This will mean that when the container initialises the db, it will be persisted across runs of the container.
+
+
+```shell
 docker run -d -p 8080:8080 -v $(pwd)/data/mysql:/var/lib/mysql 3dproteinlab
 ```
 
+Once it has started successfully, shut it down again.
+
+```shell
+docker kill <CONTAINER ID>
+```
+
+Finally decompress the db archive and copy it into the mysql directory
+
+```shell
+cp 3dproteinlab.tar.gz ./data/mysql
+cd data/mysql
+tar xvzf 3dproteinlab.tar.gz
+```
+
+Now start the container again with the local mapping 
+
+```shell
+docker run -d -p 8080:8080 -v $(pwd)/data/mysql:/var/lib/mysql 3dproteinlab
+```
+
+You now need to log into the container and 
+
+
 #### Notes
 * We don't need to expose the mysql port because it is only used internally
-* Starting the container the first time will take a long time because the database takes a long time to load.
+
 
 ## Using the App
 

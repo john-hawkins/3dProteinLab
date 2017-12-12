@@ -1,0 +1,185 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>3D Protein Lab</title>
+
+	<link rel="stylesheet" type="text/css" href="style.css"> 
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="icon" type="image/ico" href="favicon.ico">
+</head>
+<body>
+
+
+<div id="wrapper">
+
+<header id="header"> <!-- HTML5 header tag -->
+	<div id="header">
+		<div id="logo">
+				<h1><img src="images/Logo.png"></img> <a href="">3D Protein Lab</a></h1>
+		</div>
+
+		<div id="status">
+			<div class="progressMeter"> <div id="progressBar" class="progressBar"> &nbsp;&nbsp;&nbsp;Page Loading...   </div> </div>
+		</div>
+	</div>
+</header>
+
+<BR class="clear" />
+
+<nav class="main"> <!-- HTML5 navigation tag -->
+
+	<div id="navigation"> 
+
+		<ul>
+			<li><a href="#" class="current">3D Structure Search</a></li>
+			<li><a href="">Refresh</a></li>
+			<li><a href="#" class="contact" id="contactButton">Contact</a></li>
+			<li><a href="#">References</a></li>
+			<li><a href="#" class="help" id="helpButton">Help</a></li>
+		</ul>
+		
+	</div>	
+
+</nav>
+
+<section id="contentcontainer"> <!-- HTML5 section tag for the content 'section' -->
+
+	<div id="search-wrap">
+
+		<jsp:include page="search-form.jsp" />
+
+	</div>
+
+<div id="content">
+
+
+	<div id="messages"></div>
+		
+	<!--  THE FOLLOWING DIV IS USED BY THE CODE IN helpBalloons.js : A very simple popup help window script -->
+	<DIV id=HELPER style='width:100px;height:10px;background-color:#DDFFDD;border-style:solid;border-width:1px;border-color:#99DD99;padding:5px;text-align:left;position:absolute;display:none;text-decoration:none;'>HELP</DIV>
+		
+	<div id="results">
+				
+		<h2>Welcome to the 3D Protein Lab</h2>
+		
+		<p>This site allows you to search for patterns in both the sequence and
+		structure of proteins contained in the PDB collection of protein structures.</p>
+		
+		<p>The searches use a pattern syntax that is an extension of the PROSITE pattern syntax.
+		It is described in both the help file and our publication<BR>
+		Hawkins & Pisabarro. 2010. Protein Structure Search with 3D Regular Expressions. (In Preparation)</p>
+		
+		<p>Your search results will be listed showing you the residues that have matched query.
+		In addition you will be able view the PDB file with the matching residues highlighted
+		and then extract the matching residues into a PDB file. </p>
+		
+		<p>Please Note<BR>
+		As the query language is open, the amount of time that is required to run a query can vary dramatically.
+		The query status bar cannot start to show progress until after the SQL has returned the initial list of
+		potential matches. We recommend that you include some specific residues in tha pattern, and try and
+		make the sequence components as long as possible. This will severaly decrease the number of potential
+		matches that need to be evaluated. </p>
+		
+		<BR>
+		
+		<p>The interface for 3D Protein Lab is still being refined so if you see anything you do
+		not like, or notice any bugs please let us know.</p>
+
+	</div>	
+
+	
+</div>
+
+	
+	<div id='results_table_div'>
+	</div>	
+
+</section>
+
+<section id="sidebarcontainer"> <!-- HTML5 section tag for the content 'section' -->
+
+<div id="rightsidebarcont">
+
+   <div id="rightsidebar">
+  	
+	<nav class="second"> <!-- HTML5 navigation tag -->
+
+	<div id="navigation2"> 
+
+			<ul>
+				<li><a href="#" class="current">Jmol Viewer</a></li>
+				<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+				<li><b><div id="jmolmessages"></div></b></li>
+			</ul>
+		
+		</div>	
+
+	</nav>	
+
+	
+	<div id="jmolcontrol-wrap">
+
+		<jsp:include page="jmolcontrol.jsp" />
+
+	</div>
+	
+  	<div class="rsideblock">
+  		<div id="jmol" class="box">
+				
+			<script type="text/javascript">
+				jmolInitialize("./applets/jmol-11.8.25");
+				var script = "background [xFFFFFF]";
+				jmolApplet(474, script);  
+			</script>
+			<!--
+			<applet id="jmolApplet0" name="jmolApplet0" code="JmolApplet" archive="JmolApplet0.jar" codebase="./applets/jmol-11.8.25" width="100%" height="100%">
+				<param name="load" value="2P83.pdb">
+				<param name="progressbar" value="true"/>
+			</applet>
+			-->
+			
+		</div>
+	</div>
+	
+ 	<div class="rsideblock">
+ 	
+	<nav class="second"> <!-- HTML5 navigation tag -->
+		<div id="navigation3"> 
+			<ul>
+				<li><a href="#" class="current">Alignment Viewer</a></li>
+				<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+				<li><b><div id="alnmessages"></div></b></li>
+			</ul>
+		</div>	
+	</nav>	
+
+	<div id="reference">
+		<TABLE CLASS='referenceSeq' id="referenceSeq">
+		</TABLE>
+	</div>
+	
+	<div id="alignment">
+		<TABLE CLASS='alignmentSeq' id="alignmentSeq">
+		</TABLE>
+	</div>
+
+	</div>
+
+   </div>
+
+</div>
+
+
+</section>
+
+
+<footer> <!-- HTML5 footer tag -->
+	<!-- <div id="footer"> (c) 2010 John.C.Hawkins </div> -->
+</footer>
+
+</div>
+
+</body>
+</html>
