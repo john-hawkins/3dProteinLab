@@ -141,8 +141,8 @@ public class StructExpPDBSearch extends AbstractPDBSearch {
 		if(validQuery) {
 			queryExecutor = new StructExpQueryExecutor(dbprops);
 			finalSet = queryExecutor.executeQuery(query, pm);
-			//System.err.println("EXECUTED , Saved Search is " + saveSearch + "<BR>");
-			
+			System.err.println("QUERY EXECUTED , Saved Search is " + saveSearch + "<BR>");
+			System.err.println("Number of elements " + finalSet.size() + "<BR>");
 			if(saveSearch) {
 				queryId = queryExecutor.saveSearch(query, finalSet);
 			}

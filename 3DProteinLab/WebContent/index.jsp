@@ -19,8 +19,8 @@
 	<script src="js/sidebarslide2.js" type="text/javascript"></script>
 	<script src="js/jquery.alerts.js" type="text/javascript"></script>
 
-	<script src="applets/jmol-11.8.25/Jmol.js" type="text/javascript"></script>
-	
+	<script  src="js/JSmol.min.js" type="text/javascript"></script>
+		
 	<script src="js/site_specific.js" type="text/javascript"></script>
 	
 	<!--- GOOGLE SCRIPT FOR SORTABLE TABLES   --->
@@ -41,6 +41,47 @@
   	</script>
 	<![endif]-->
 	
+	<script type="text/javascript">
+
+		Jmol._isAsync = false;
+
+		var jmolApplet0; 
+		var s = document.location.search;
+
+		Jmol._debugCode = (s.indexOf("debugcode") >= 0);
+		
+		jmol_isReady = function(applet) {
+			document.title = (applet._id + " - Jmol " + Jmol.___JmolVersion)
+			Jmol._getElement(applet, "appletdiv").style.border="1px solid white"
+		}		
+
+		var widthForJmol = getSideBarWidth();
+		var viewerHeight = getJmolHeight();
+		
+		var Info = {
+			width: widthForJmol,
+			height: viewerHeight,
+			debug: false,
+			color: "0xFFFFFF",
+			addSelectionOptions: false,
+			use: "HTML5",   // JAVA HTML5 WEBGL are all options
+			j2sPath: "./j2s", // this needs to point to where the j2s directory is.
+			jarPath: "./java",// this needs to point to where the java directory is.
+			jarFile: "JmolAppletSigned.jar",
+			isSigned: true,
+			script: "set zoomlarge false;set antialiasDisplay;load data/caffeine.mol",
+			serverURL: "http://chemapps.stolaf.edu/jmol/jsmol/php/jsmol.php",
+			readyFunction: jmol_isReady,
+			disableJ2SLoadMonitor: true,
+		    disableInitialConsole: true,
+		    allowJavaScript: true
+		}
+
+		$(document).ready(function() {
+		  $("#appdiv").html(Jmol.getAppletHtml("jmolApplet0", Info))
+		})
+		var lastPrompt=0;
+	</script>
 </head>
 <body onload="onLoadScript();">
 
@@ -182,18 +223,7 @@
 		</div>
 	
   		<div class="rsideblock">
-  			<div id="jmol" class="box">
-				<script type="text/javascript">
-					jmolInitialize("./applets/jmol-11.8.25");
-					var script = "background [xFFFFFF]";
-					var widthForJmol = getSideBarWidth();
-					var viewerHeight = getJmolHeight();
-					var sizeArray = new Array();
-					sizeArray[0]=widthForJmol;
-					sizeArray[1]=viewerHeight;
-					jmolApplet(sizeArray, script);  
-				</script>			
-			</div>
+			<div id="appdiv"></div>
 		</div>
 	
 

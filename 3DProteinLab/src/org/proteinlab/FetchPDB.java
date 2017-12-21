@@ -93,29 +93,29 @@ public class FetchPDB extends HttpServlet {
 		
 	private String getPDBFile(String pdbid) {
 		String result = "";
-		String pathtofile = "http://www.pdb.org/pdb/download/downloadFile.do?fileFormat=pdb&compression=NO&structureId="+ pdbid ;
-
+		//String pathtofile = "http://www.pdb.org/pdb/download/downloadFile.do?fileFormat=pdb&compression=NO&structureId="+ pdbid ;
+		String pathtofile = "https://www.rcsb.org/pdb/download/downloadFile.do?fileFormat=pdb&compression=NO&structureId=" + pdbid;
+		
         try        {
-        	URL                url; 
-        	URLConnection      urlConn; 
+        		URL                url; 
+        		URLConnection      urlConn; 
 
-        	url = new URL(pathtofile);
+        		url = new URL(pathtofile);
 
-        	urlConn = url.openConnection(); 
-        	urlConn.setDoInput(true); 
-        	urlConn.setUseCaches(false);
+        		urlConn = url.openConnection(); 
+        		urlConn.setDoInput(true); 
+        		urlConn.setUseCaches(false);
 
             BufferedReader d = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
             // Copy the contents of the stream to the output stream
             char[] buf = new char[1024];
             int count = 0;
             while ((count = d.read(buf)) >= 0) {
-            	result = result + new String(buf).substring(0, count);
+            		result = result + new String(buf).substring(0, count);
             }
 
-        	d.close(); 
+        		d.close(); 
         }
-
         catch (MalformedURLException mue) {} 
         catch (IOException ioe) {} 
 		

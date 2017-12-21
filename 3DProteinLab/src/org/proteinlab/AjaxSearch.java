@@ -136,7 +136,7 @@ public class AjaxSearch extends HttpServlet {
 	         */
 	        SearchRequest.killRequstsByUser(sessionID);
 	        
-	        /*
+	        /*			*/
 	        System.err.println("3D Protein Lab Search - PARAMETERS <BR>");
 	        System.err.println("Ip Address:  " + addr + "  <BR>");
 	        System.err.println("Host:  " + host + "  <BR>");
@@ -150,10 +150,10 @@ public class AjaxSearch extends HttpServlet {
 	        System.err.println("tech:  " + tech + "  <BR>");
 	        System.err.println("regex:  " + regex + "  <BR>");
 	        System.err.println("interactors:  " + interactors + "  <BR>");
-			*/
+
 			SearchRequest searchSearchRequest = new org.proteinlab.SearchRequest(sessionID, addr, pdbid,  scopid,  keywords, redundancy, annot,  resOp, resolution,   tech,   regex,   interactors, hits, dist);
 
-			//System.err.println("REQUEST CREATED ! ohh yeah  <BR>");
+			System.err.println("REQUEST CREATED ! ohh yeah  <BR>");
 
 			try{
 				searchSearchRequest.execute(dbprops);

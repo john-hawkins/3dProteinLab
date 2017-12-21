@@ -8,10 +8,10 @@
 		
 		function unloadPDB() {  
 
-			//alert("UNLOADING: " + loaded );
 			if(loaded=="NULL") {
 			} else {
-				jmolScript("zap; background [xFFFFFF]", 'all');
+				Jmol.script(jmolApplet0,"zap; background [xFFFFFF]")
+				//jmolScript("zap; background [xFFFFFF]", 'all');
 				document.getElementById('jmolmessages').innerHTML=" ";
 				var theTable = document.getElementById('referenceSeq');
 				theTable.deleteRow(0);
@@ -21,28 +21,30 @@
 		} 
 		
 		function loadPDB(pdbid) {  
-			unloadPDB();
-			var script = "load 'FetchPDB?pdbid=" + pdbid + "'; background [x000000]; wireframe off; spacefill off; ribbon ON; color TRANSLUCENT";
-			jmolScript(script, 'all');
+			var script = "load '=" + pdbid + "'; background [x000000]; wireframe off; spacefill off; ribbon ON; color TRANSLUCENT";
+			Jmol.script(jmolApplet0,script)
 			document.getElementById('jmolmessages').innerHTML="PDB: " + pdbid;
 			loaded=pdbid;
 		}  
 
 		function applyUserPreferences() {  
 			var script = "animation mode loop; animation " + animation + "; spin " + rotation;
-			jmolScript(script, 'all');
+			Jmol.script(jmolApplet0,script)
 		}  
 
-		function toggleRotation(value) {
-			rotation = value;
-			applyUserPreferences()
-		}  
-		
-		function toggleAnimation(value) {  
-			animation = value;
+		function toggleTheRotation() {
+			if(rotation == "OFF") rotation="ON";
+			else rotation = "OFF";
 			applyUserPreferences();
-		}      
-			  
+		}
+
+		function toggleTheAnimation() {
+			if(animation == "OFF") animation="ON";
+			else animation = "OFF";
+			applyUserPreferences();
+		}
+		
+
 		function highlightResdiues(values) {  
 				var script = "select " + values + "; wireframe 20; spacefill 40; color [xFF3333]";
 				jmolScript(script, 'all');
@@ -50,14 +52,15 @@
 
 		function loadAndHighlight(pdbid, values, matchID, residues, targetImg) {  
 
-				//alert("You want to LOAD: " + matchID + " currently " + loaded );
 				unloadPDB();
-				var script = "load 'FetchPDB?pdbid=" + pdbid + "'; background [xFFFFFF]; wireframe off; spacefill off; ribbon ON; color TRANSLUCENT";
+				//var script = "load 'GetPDB?pdbid=" + pdbid + "'; background [xFFFFFF]; wireframe off; spacefill off; ribbon ON; color TRANSLUCENT";
+				var script = "load '=" + pdbid + "'; background [xFFFFFF]; wireframe off; spacefill off; ribbon ON; color TRANSLUCENT";
 				if(values!="") {
 					var script2 = "select " + values + "; wireframe 20; spacefill 40; color [xFF3333]; center " + values;
 					script = script + ";" + script2;
 				}
-				jmolScript(script, 'all');
+				Jmol.script(jmolApplet0, script);
+
 				applyUserPreferences();
 				
 				document.getElementById('jmolmessages').innerHTML="PDB: " + pdbid;
@@ -133,32 +136,17 @@
 
 	<div class="clear">
 			<label for="rotate" class='long'>Rotation</label>
-			<select name="rotate">
-        		<option onclick="toggleRotation('OFF');">Off</option>
-        		<option onclick="toggleRotation('ON');">On</option>
+			<select name="rotate" onchange="toggleTheRotation()">
+        		<option>Off</option>
+        		<option>On</option>
   			</select>
 	</div>
 	<div class="clear">
 			<label for="animate" class='long'>Animate NMR</label>
-			<select name="animate">
-        		<option onclick="toggleAnimation('OFF');">Off</option>
-        		<option onclick="toggleAnimation('ON');">On</option>
+			<select name="animate"  onchange="toggleTheAnimation()">
+        		<option>Off</option>
+        		<option>On</option>
   			</select>
 	</div>
-	<!--  
-	<div class="clear">
-			<label for="load" class="">Load </label>
-			<select name="load">
-        		<option onclick="loadPDB('2PDZ');">2PDZ</option>
-        		<option onclick="loadPDB('2GA5');">2GA5</option>
-  			</select>
-	</div>
-	<div class="clear">
-			<label for="highlite" class="">Highlite </label>
-			<select name="highlite">
-        		<option onclick="highlightResdiues('50:A');">50:A</option>
-        		<option onclick="highlightResdiues('40:A OR 41:A');">40:A OR 41:A</option>
-  			</select>
-	</div>
-	-->
+
 </form> 

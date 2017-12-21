@@ -127,14 +127,3 @@ function onLoadScript() {
 	  document.masterForm.dist.value = document.searchForm.dist.value;
 	  return submitMasterForm();
   }
-
-  function submitContactForm() {
-	  var urlString = "AjaxContact?name=" +document.contactForm.name.value + "&email=" + document.contactForm.email.value+ "&subject=" + document.contactForm.subject.value+ "&message=" + document.contactForm.message.value;
-	  GetFormMessage( urlString );
-	  //document.getElementById('contact-wrap').innerHTML="Message Sent";
-	  //document.getElementById('contactButton').toggle();
-	  //document.getElementById('contact-wrap').remove();
-	  $('#contact-wrap').remove();
-	  $('#contactButton').removeClass("current");
-	  return false;
-  }

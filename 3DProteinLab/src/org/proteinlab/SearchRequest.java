@@ -136,10 +136,12 @@ public class SearchRequest {
         System.err.println("EXECUTING , Saved Search is " + savedSearchOn + "<BR>");
         
         StructExpPDBSearch app = new StructExpPDBSearch(pm, dbProps, savedSearchOn);
-
+        System.err.println("StructExpPDBSearch Created " );
         System.err.println("PSEUDO POINTS:  " + pseudoatoms );
     		app.prepareQuery( IPaddress, pdbid,  scopid,  keywords, redundancy, annot,  resolutionOperator, resolution, tech, regex, interactors, multihits, pseudoatoms);
+    		System.err.println("Query Prepared " );
     		app.run();
+    		System.err.println("Search Executed" );
     		queryId = app.getQueryId();
     		finalSet = app.getFinalSet();
 		setResultsAvailable();

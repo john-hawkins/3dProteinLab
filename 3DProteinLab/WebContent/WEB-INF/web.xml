@@ -42,12 +42,10 @@
 	
 	
 	<servlet>
-		<description>
-		Servlet to retrive PDB Files</description>
+		<description>Servlet to retrieve PDB Files</description>
 		<display-name>FetchPDB</display-name>
 		<servlet-name>FetchPDB</servlet-name>
-		<servlet-class>
-		org.proteinlab.FetchPDB</servlet-class>
+		<servlet-class>org.proteinlab.FetchPDB</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>FetchPDB</servlet-name>
@@ -55,8 +53,18 @@
 	</servlet-mapping>
 	
 	<servlet>
-		<description>
-		Servlet to perform Admin Activities</description>
+		<description>Get PDB Files</description>
+		<display-name>GetPDB</display-name>
+		<servlet-name>GetPDB</servlet-name>
+		<servlet-class>org.proteinlab.GetPDB</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetPDB</servlet-name>
+		<url-pattern>/GetPDB</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description>Servlet to perform Admin Activities</description>
 		<display-name>AdminApp</display-name>
 		<servlet-name>AdminApp</servlet-name>
 		<servlet-class>
