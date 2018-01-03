@@ -41,7 +41,6 @@ WORKDIR $TOMCAT_HOME
 # Add volumes for MySQL 
 VOLUME  ["/etc/mysql", "/var/lib/mysql"]
 
-#
 # Copy the WAR file
 COPY 3DProteinLab.war /opt/apache-tomcat-7.0.82/webapps/3DProteinLab.war
 

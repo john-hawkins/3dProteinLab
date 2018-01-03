@@ -7,8 +7,10 @@ created by Manuel de la Peña.
 I have modified the version of Tomcat, fixed some minor bugs with the MySQL scripts and made the DB script setup the required database 
 and copy over the WAR file. So that by building this single docker app you will have a standalone version of the 3D Protein Lab application.
 
-Note: because of the size of the database, you will need go through a few steps once the container is built to get it working (see below).
-
+### Important Note
+You will need go through a few steps once the container is built to get it running with the required database.
+We have tried making the run script initialise the DB with a mysql dump file, but the DB is too large and docker fails every time we try.
+Instead we recommend copying the MySQL files into a shared folder that the application will use.
 
 ## Usage
 
@@ -61,9 +63,11 @@ docker kill <CONTAINER ID>
 Finally decompress the db archive and copy it into the mysql directory
 
 ```shell
-cp 3dproteinlab.tar.gz ./data/mysql
-cd data/mysql
-tar xvzf 3dproteinlab.tar.gz
+cd ../db
+cat proteinlab_db_* > proteinlab.tar.gz
+tar -zxvf proteinlab.tar.gz
+mv proteinlab ../docker/data/mysql/proteinlab
+cd ../docker
 ```
 
 Now start the container again with the local mapping 
